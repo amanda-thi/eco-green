@@ -4065,6 +4065,361 @@
           .btn::after {
             display: none;
           }
+
+          /* ===== FIX: hero pas satu layar + garis navbar melayang ===== */
+          :root {
+            --bh: 72px;
+          }
+          header.scrolled {
+            --bh: 60px;
+          }
+          .bar {
+            height: var(--bh);
+          }
+          @media (min-width: 1001px) {
+            nav a,
+            nav .dd > button {
+              position: relative;
+              display: flex;
+              align-items: center;
+              height: var(--bh);
+              padding: 0 14px;
+              box-shadow: none;
+              transition: height 0.35s;
+            }
+            nav a[aria-current],
+            nav .dd > button[aria-current] {
+              box-shadow: none;
+            }
+            nav a::after,
+            nav .dd > button[aria-current]::before {
+              content: "";
+              position: absolute;
+              left: 14px;
+              right: 14px;
+              bottom: 10px;
+              height: 3px;
+              border-radius: 999px;
+              background: var(--green);
+              transform: scaleX(0);
+              transform-origin: center;
+              transition: transform 0.3s ease;
+              pointer-events: none;
+            }
+            nav a[aria-current]::after,
+            nav .dd > button[aria-current]::before {
+              transform: scaleX(1);
+            }
+            nav .sub a::after {
+              display: none;
+            }
+            nav .sub a {
+              height: auto;
+              padding: 10px 14px;
+            }
+          }
+          .topbar {
+            display: none;
+          }
+          .hero .wrap {
+            min-height: calc(100vh - 72px);
+            min-height: calc(100svh - 72px);
+            padding-block: clamp(20px, 4vh, 48px);
+            box-sizing: border-box;
+          }
+          .hero h1 {
+            font-size: clamp(2.2rem, min(5.2vw, 9vh), 4.2rem);
+          }
+          .hero h1::before {
+            margin-bottom: clamp(8px, 2vh, 20px);
+          }
+          .hero h2 {
+            font-size: clamp(1rem, min(1.8vw, 3vh), 1.3rem);
+            margin: clamp(8px, 1.8vh, 18px) 0;
+          }
+          .hero p {
+            font-size: clamp(0.9rem, 2vh, 1.05rem);
+            margin-bottom: clamp(16px, 3vh, 30px);
+          }
+
+          /* ===== PROSES: ringkas, pas satu layar ===== */
+          .proc.pfd-sec,
+          .pfd {
+            background: var(--deep);
+          }
+          .pfd-fig {
+            background-image: none;
+          }
+          .pfd-fig figcaption {
+            display: none;
+          }
+          .pfd-fig {
+            padding: 16px 24px;
+            justify-content: center;
+          }
+          .pfd-fig svg {
+            max-height: calc(100vh - 480px);
+            min-height: 180px;
+            width: 100%;
+          }
+          .pfd-txt {
+            padding: 16px 40px;
+          }
+          .proc.pfd-sec {
+            padding: clamp(16px, 3.5vh, 40px) 0 clamp(16px, 3.5vh, 40px);
+            min-height: 0;
+          }
+          .proc.pfd-sec h2 {
+            font-size: clamp(1.6rem, 3.4vh, 2.2rem);
+            margin: 0;
+          }
+          .proc.pfd-sec .lede {
+            margin: 4px 0 0;
+            font-size: 0.95rem;
+          }
+          .pfd {
+            margin-top: clamp(12px, 2.4vh, 24px);
+          }
+          .pfd-txt h3 {
+            margin: 8px 0;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+          }
+          .pfd-d {
+            font-size: 0.98rem;
+            line-height: 1.55;
+          }
+          .pfd-io {
+            margin-top: 14px;
+          }
+          .pfd-io > div {
+            padding: 8px 0;
+          }
+          .pfd-nav {
+            margin-top: 14px;
+          }
+          .pfd-nb {
+            width: 42px;
+            height: 42px;
+          }
+          .pfd-fig svg {
+            max-height: none;
+            min-height: 0;
+            height: 100%;
+          }
+          .pfd-fig::before {
+            inset: 10px;
+          }
+
+          /* ===== PROSES: lebih ringkas lagi untuk layar pendek (desktop) ===== */
+          @media (min-width: 861px) {
+            .pfd-batch {
+              top: 2px;
+            }
+            .pfd-rail {
+              top: 38px;
+            }
+            .pfd-st {
+              height: 136px;
+            }
+            .pfd-st::before {
+              top: 50px;
+            }
+            .pfd-st .n {
+              top: 68px;
+              width: 36px;
+              height: 36px;
+            }
+            .pfd-st .l {
+              top: 112px;
+            }
+            .pfd-txt {
+              position: relative;
+              padding: 14px 40px;
+            }
+            .pfd-nav {
+              position: absolute;
+              top: 14px;
+              right: 40px;
+              margin: 0;
+            }
+            .pfd-nb {
+              width: 38px;
+              height: 38px;
+              border-radius: 12px;
+            }
+          }
+          @media (max-height: 700px) and (min-width: 861px) {
+            .proc.pfd-sec .lede {
+              display: none;
+            }
+            .pfd-d {
+              font-size: 0.92rem;
+              line-height: 1.45;
+            }
+            .pfd-io > div {
+              padding: 6px 0;
+            }
+          }
+
+          @media (min-width: 861px) {
+            .pfd-fig svg {
+              height: auto;
+              max-height: clamp(150px, calc(100vh - 400px), 300px);
+            }
+          }
+
+          /* tinggi kartu sama di semua tahap */
+          @media (min-width: 861px) {
+            .pfd-d {
+              min-height: calc(3 * 1.55em);
+            }
+          }
+          @media (max-height: 700px) and (min-width: 861px) {
+            .pfd-d {
+              min-height: calc(3 * 1.45em);
+            }
+          }
+
+          /* ===== BENTO "Dari tumpukan sampah": pas satu layar (desktop) ===== */
+          @media (min-width: 861px) {
+            section:has(> .wrap > .bento) {
+              padding: clamp(20px, 4vh, 48px) 0 clamp(20px, 4vh, 48px);
+              min-height: calc(100vh - 72px);
+              min-height: calc(100svh - 72px);
+              box-sizing: border-box;
+              display: flex;
+              align-items: center;
+            }
+            section:has(> .wrap > .bento) > .wrap {
+              width: 100%;
+            }
+            section:has(> .wrap > .bento) h2 {
+              font-size: clamp(1.6rem, min(3.4vw, 5.4vh), 2.5rem);
+            }
+            section:has(> .wrap > .bento) .lede {
+              font-size: clamp(0.88rem, 2.3vh, 1.05rem);
+              line-height: 1.55;
+            }
+            .bento {
+              grid-auto-rows: minmax(0, 1fr);
+              gap: clamp(10px, 2vh, 18px);
+              margin-top: clamp(14px, 3vh, 36px);
+              height: clamp(260px, calc(100svh - 72px - 230px), 560px);
+            }
+            .bento .tile {
+              padding: clamp(14px, 3vh, 28px) clamp(18px, 2vw, 28px);
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            }
+            .bento .tile .n {
+              font-size: clamp(2rem, min(6vw, 8vh), 4.4rem);
+            }
+            .bento .tile p {
+              font-size: clamp(0.82rem, 2vh, 0.98rem);
+              margin-top: clamp(4px, 1vh, 10px);
+              line-height: 1.45;
+            }
+            .bento .tile.span2 p {
+              font-size: clamp(0.9rem, 2.4vh, 1.1rem) !important;
+            }
+          }
+
+          /* ===== "Dipakai di Berbagai Industri": pas satu layar (desktop) ===== */
+          @media (min-width: 961px) {
+            section:has(> .wrap > #tilesHome) {
+              padding: clamp(20px, 4vh, 48px) 0;
+              min-height: calc(100vh - 72px);
+              min-height: calc(100svh - 72px);
+              box-sizing: border-box;
+              display: flex;
+              align-items: center;
+            }
+            section:has(> .wrap > #tilesHome) > .wrap {
+              width: 100%;
+            }
+            section:has(> .wrap > #tilesHome) h2 {
+              font-size: clamp(1.6rem, min(3.4vw, 5.4vh), 2.5rem);
+            }
+            section:has(> .wrap > #tilesHome) .lede {
+              font-size: clamp(0.88rem, 2.3vh, 1.05rem);
+              margin-top: 6px;
+            }
+            #tilesHome {
+              margin-top: clamp(14px, 3vh, 32px);
+            }
+            #tilesHome .itile .ph {
+              aspect-ratio: auto;
+              height: clamp(110px, 28vh, 260px);
+            }
+            #tilesHome .itile .tx {
+              padding: clamp(12px, 2.4vh, 20px) 20px clamp(14px, 2.6vh, 24px);
+            }
+            #tilesHome .itile h3 {
+              font-size: clamp(0.95rem, 2.4vh, 1.1rem);
+              line-height: 1.25;
+              margin-bottom: 4px;
+            }
+            #tilesHome .itile p {
+              font-size: clamp(0.8rem, 2vh, 0.9rem);
+              line-height: 1.45;
+            }
+          }
+
+          /* jarak judul "Bagaimana Sampah Diolah" ke kartu */
+          .pfd {
+            margin-top: clamp(20px, 3.8vh, 36px);
+          }
+
+          /* ===== PROSES: skala mengikuti tinggi layar desktop ===== */
+          @media (min-width: 861px) {
+            .proc.pfd-sec {
+              --pp: clamp(24px, 5vh, 56px);
+              padding: var(--pp) 0;
+              min-height: calc(100vh - 72px);
+              min-height: calc(100svh - 72px);
+              box-sizing: border-box;
+              display: flex;
+              align-items: center;
+            }
+            .proc.pfd-sec > .wrap {
+              width: 100%;
+            }
+            .proc.pfd-sec h2 {
+              font-size: clamp(1.7rem, min(3.4vw, 5vh), 2.6rem);
+            }
+            .pfd-detail {
+              min-height: clamp(
+                260px,
+                calc(100svh - 72px - 2 * var(--pp) - 100px - 36px - 154px),
+                520px
+              );
+            }
+            .pfd-fig svg {
+              max-height: clamp(150px, calc(100svh - 380px), 400px);
+            }
+            .pfd-txt {
+              padding: clamp(16px, 3vh, 36px) 40px;
+            }
+            .pfd-txt h3 {
+              font-size: clamp(1.7rem, min(3vw, 5vh), 2.6rem);
+              margin: clamp(8px, 1.4vh, 14px) 0;
+            }
+            .pfd-d {
+              font-size: clamp(0.92rem, 2vh, 1.06rem);
+              line-height: 1.55;
+            }
+            .pfd-io {
+              margin-top: clamp(14px, 2.6vh, 26px);
+            }
+            .pfd-io > div {
+              padding: clamp(7px, 1.4vh, 13px) 0;
+            }
+            .pfd-nb {
+              width: clamp(38px, 5vh, 46px);
+              height: clamp(38px, 5vh, 46px);
+            }
+          }
         </style>
       </head>
       <body>
@@ -4440,8 +4795,8 @@
                     menghasilkan energi.
                   </p>
                   <div class="cta">
-                    <a class="btn" href="#/tentang">Kenali kami</a
-                    ><a class="btn wl" href="#/produk">Lihat produk</a>
+                    <a class="btn" href="#/tentang">Kenali Kami</a
+                    ><a class="btn wl" href="#/produk">Lihat Produk</a>
                   </div>
                 </div>
                 <div class="hv">
@@ -4478,7 +4833,7 @@
               <div class="wrap">
                 <div class="split">
                   <div class="rv">
-                    <h2>Dari tumpukan sampah menjadi bahan bakar</h2>
+                    <h2>Dari Tumpukan Sampah Menjadi Bahan Bakar</h2>
                   </div>
                   <p class="lede rv d1" style="margin: 0; max-width: none">
                     PT Green Eco Teknologi hadir sebagai solusi pengelolaan
@@ -4525,7 +4880,7 @@
 
             <section class="proc pfd-sec" style="margin-top: 40px">
               <div class="wrap">
-                <h2 class="rv">Bagaimana sampah diolah</h2>
+                <h2 class="rv">Bagaimana Sampah Diolah</h2>
                 <p class="lede rv">
                   Klik tiap tahap untuk melihat apa yang terjadi di TPSA
                   Bagendung.
@@ -4538,7 +4893,7 @@
               <div class="wrap">
                 <div class="prodhead">
                   <div class="rv">
-                    <h2>Produk kami</h2>
+                    <h2>Produk Kami</h2>
                     <p class="lede">
                       Limbah diubah menjadi produk bernilai guna.
                     </p>
@@ -4551,7 +4906,7 @@
                       flex-wrap: wrap;
                     "
                   >
-                    <a class="btn line" href="#/produk">Semua produk</a>
+                    <a class="btn line" href="#/produk">Semua Produk</a>
                     <div class="arrows">
                       <button id="prev" aria-label="Produk sebelumnya">
                         &#8592;</button
@@ -4583,7 +4938,7 @@
                   </div>
                 </div>
                 <div class="rv d1">
-                  <h2>Mengapa sampah perlu diolah jadi RDF</h2>
+                  <h2>Mengapa Sampah Perlu Diolah Jadi RDF</h2>
                   <ul class="pts" id="why"></ul>
                 </div>
               </div>
@@ -4601,7 +4956,7 @@
                   </p>
                 </div>
                 <div class="rv d1">
-                  <h2>Pisau penghancur yang lebih awet</h2>
+                  <h2>Pisau Penghancur yang Lebih Awet</h2>
                   <p class="lede">
                     Teknologi yang kami pakai pada mata pisau shredder dan
                     crusher menekan biaya penggantian.
@@ -4619,7 +4974,7 @@
                     </div>
                   </div>
                   <a class="btn" style="margin-top: 30px" href="#/teknologi"
-                    >Pelajari teknologinya</a
+                    >Pelajari Teknologinya</a
                   >
                 </div>
               </div>
@@ -4628,7 +4983,7 @@
             <section>
               <div class="wrap">
                 <div class="rv">
-                  <h2>Dipakai di berbagai industri</h2>
+                  <h2>Dipakai di Berbagai Industri</h2>
                   <p class="lede">
                     Peralatan penghancur yang kami desain dan produksi sendiri.
                   </p>
@@ -4646,7 +5001,7 @@
                     meningkatkan kualitas RDF. Mari diskusikan kebutuhan Anda.
                   </p>
                 </div>
-                <a class="btn" href="#/kontak">Hubungi kami</a>
+                <a class="btn" href="#/kontak">Hubungi Kami</a>
               </div>
             </section>
           </div>
@@ -4676,7 +5031,7 @@
               <div class="wrap">
                 <div class="split">
                   <div class="rv">
-                    <h2>Tantangan lingkungan, kami jadikan peluang</h2>
+                    <h2>Tantangan Lingkungan, Kami Jadikan Peluang</h2>
                     <p class="pull">
                       Pendekatan berbasis teknologi dan keberlanjutan untuk
                       perubahan yang nyata.
@@ -4721,7 +5076,7 @@
             </section>
             <section style="padding-top: 0">
               <div class="wrap">
-                <h2 class="rv">Kapasitas pengolahan TPSA Bagendung</h2>
+                <h2 class="rv">Kapasitas Pengolahan TPSA Bagendung</h2>
                 <p class="lede rv">
                   Revitalisasi menargetkan kapasitas olah naik dari 30 ton/hari
                   menjadi 60 ton/hari atau lebih.
@@ -4745,22 +5100,22 @@
             </section>
             <section class="dk" style="border-radius: 48px">
               <div class="wrap">
-                <h2 class="rv">Tujuan revitalisasi TPSA Bagendung</h2>
+                <h2 class="rv">Tujuan Revitalisasi TPSA Bagendung</h2>
                 <div class="obj">
                   <div class="rv">
-                    <h3>Pencacahan dan fermentasi</h3>
+                    <h3>Pencacahan dan Fermentasi</h3>
                     <p>Meningkatkan kualitas BBJP/RDF.</p>
                   </div>
                   <div class="rv d1">
-                    <h3>Kapasitas dua kali lipat</h3>
+                    <h3>Kapasitas Dua Kali Lipat</h3>
                     <p>Dari 30 ton/hari menjadi 60 ton/hari.</p>
                   </div>
                   <div class="rv d2">
-                    <h3>Sistem dryer</h3>
+                    <h3>Sistem Dryer</h3>
                     <p>Menurunkan kadar air dan menaikkan nilai kalor RDF.</p>
                   </div>
                   <div class="rv d3">
-                    <h3>Lingkungan terintegrasi</h3>
+                    <h3>Lingkungan Terintegrasi</h3>
                     <p>Pengelolaan air lindi dan gas metana.</p>
                   </div>
                 </div>
@@ -4776,17 +5131,17 @@
                     sehat dan ramah energi.
                   </p>
                 </div>
-                <h2 style="margin-top: 70px" class="rv">Misi kami</h2>
+                <h2 style="margin-top: 70px" class="rv">Misi Kami</h2>
                 <div class="mis" id="mis"></div>
               </div>
             </section>
             <section style="background: var(--soft)">
               <div class="wrap">
-                <h2 class="rv">Layanan perusahaan</h2>
+                <h2 class="rv">Layanan Perusahaan</h2>
                 <div class="bento" style="grid-template-columns: 1.3fr 1fr 1fr">
                   <div class="tile g span2 rv">
                     <h3 style="font-size: 1.6rem">
-                      Konsultasi dan implementasi teknologi RDF
+                      Konsultasi dan Implementasi Teknologi RDF
                     </h3>
                     <p style="font-size: 1.02rem">
                       Pendampingan merancang dan menerapkan sistem RDF/BBJP,
@@ -4794,19 +5149,19 @@
                     </p>
                   </div>
                   <div class="tile rv d1" style="background: var(--card)">
-                    <h3>Pemilahan dan energi alternatif</h3>
+                    <h3>Pemilahan dan Energi Alternatif</h3>
                     <p>
                       Memilah sampah dan memanfaatkannya sebagai sumber energi.
                     </p>
                   </div>
                   <div class="tile rv d2" style="background: var(--card)">
-                    <h3>Pengolahan sampah terpadu</h3>
+                    <h3>Pengolahan Sampah Terpadu</h3>
                     <p>
                       Mengelola alur sampah dari penimbangan sampai pengeringan.
                     </p>
                   </div>
                   <div class="tile d rv d1" style="grid-column: span 2">
-                    <h3>Audit dan pengelolaan dampak lingkungan</h3>
+                    <h3>Audit dan Pengelolaan Dampak Lingkungan</h3>
                     <p>Termasuk pengelolaan air lindi dan gas metana.</p>
                   </div>
                 </div>
@@ -4856,7 +5211,7 @@
                     <figcaption>Konveyor dan pemilahan</figcaption>
                   </figure>
                 </div>
-                <h2 style="margin-top: 96px" class="rv">Alur peralatan</h2>
+                <h2 style="margin-top: 96px" class="rv">Alur Peralatan</h2>
                 <p class="lede rv">
                   Urutan peralatan utama di TPSA Bagendung. IPAS mengolah air
                   lindi dan IPLT mengolah lumpur tinja di sekitar TPSA.
@@ -4868,13 +5223,13 @@
             <section class="band">
               <div class="wrap">
                 <div>
-                  <h2>Butuh peralatan penghancur?</h2>
+                  <h2>Butuh Peralatan Penghancur?</h2>
                   <p>
                     Kami mendesain dan memproduksi sendiri lini peralatan
                     penghancur.
                   </p>
                 </div>
-                <a class="btn" href="#/kontak">Minta penawaran</a>
+                <a class="btn" href="#/kontak">Minta Penawaran</a>
               </div>
             </section>
           </div>
@@ -4908,7 +5263,7 @@
                     menjadi solusi yang bermanfaat.
                   </p>
                 </div>
-                <a class="btn" href="#/kontak">Hubungi kami</a>
+                <a class="btn" href="#/kontak">Hubungi Kami</a>
               </div>
             </section>
           </div>
@@ -4966,7 +5321,7 @@
                       <b>1x</b>
                     </div>
                     <div class="b">
-                      <span>Pengelasan khusus</span>
+                      <span>Pengelasan Khusus</span>
                       <div class="tr"><i style="--w: 100%"></i></div>
                       <b>4-5x</b>
                     </div>
@@ -4979,7 +5334,7 @@
             </section>
             <section style="padding-top: 0">
               <div class="wrap">
-                <h2 class="rv">Hasil pelapisan dan pengelasan</h2>
+                <h2 class="rv">Hasil Pelapisan dan Pengelasan</h2>
                 <div class="gal3 rv">
                   <figure>
                     <img
@@ -5004,7 +5359,7 @@
                   </figure>
                   <figure>
                     <img data-i="las" alt="Pengelasan logam" loading="lazy" />
-                    <figcaption>Pengelasan khusus</figcaption>
+                    <figcaption>Pengelasan Khusus</figcaption>
                   </figure>
                 </div>
               </div>
@@ -5027,7 +5382,7 @@
                         class="mk"
                         data-k="hook"
                         style="left: 13%; top: 57%"
-                        aria-label="Hook tip"
+                        aria-label="Hook Tip"
                       >
                         1
                       </button>
@@ -5035,7 +5390,7 @@
                         class="mk"
                         data-k="side"
                         style="left: 64%; top: 30%"
-                        aria-label="Side cutter"
+                        aria-label="Side Cutter"
                       >
                         2
                       </button>
@@ -5043,7 +5398,7 @@
                         class="mk"
                         data-k="body"
                         style="left: 28%; top: 37%"
-                        aria-label="Cutter body"
+                        aria-label="Cutter Body"
                       >
                         3
                       </button>
@@ -5051,7 +5406,7 @@
                         class="mk"
                         data-k="lock"
                         style="left: 83%; top: 53%"
-                        aria-label="Locking system"
+                        aria-label="Locking System"
                       >
                         4
                       </button>
@@ -5071,15 +5426,15 @@
                     </p>
                   </div>
                   <div class="rv d1">
-                    <h3>Biaya operasional</h3>
+                    <h3>Biaya Operasional</h3>
                     <p>Hanya komponen yang aus yang diganti.</p>
                   </div>
                   <div class="rv d2">
-                    <h3>Efisien dirawat</h3>
+                    <h3>Efisien Dirawat</h3>
                     <p>Pemeliharaan lebih cepat berkat desain modular.</p>
                   </div>
                   <div class="rv d3">
-                    <h3>Pengelasan khusus</h3>
+                    <h3>Pengelasan Khusus</h3>
                     <p>Umur pakai hingga 4-5 kali lebih lama.</p>
                   </div>
                   <div class="rv">
@@ -5091,7 +5446,7 @@
             </section>
             <section>
               <div class="wrap">
-                <h2 class="rv">Produksi dan desain mandiri</h2>
+                <h2 class="rv">Produksi dan Desain Mandiri</h2>
                 <p class="lede rv">
                   Kami tidak hanya mengadopsi teknologi unggulan, tetapi juga
                   mendesain dan memproduksi sendiri lini peralatan penghancur.
@@ -5129,7 +5484,7 @@
                 <div class="tiles" id="tilesInd" style="margin-top: 0"></div>
                 <div class="split" style="margin-top: 80px">
                   <div class="rv">
-                    <h2>Daur ulang dengan efisiensi tinggi</h2>
+                    <h2>Daur Ulang dengan Efisiensi Tinggi</h2>
                     <p class="lede">
                       Pengolahan limbah seperti plastik, vinil, kayu, dan
                       material lainnya.
@@ -5155,13 +5510,13 @@
             <section class="band">
               <div class="wrap">
                 <div>
-                  <h2>Ceritakan kebutuhan industri Anda</h2>
+                  <h2>Ceritakan Kebutuhan Industri Anda</h2>
                   <p>
                     Kami siap membantu dengan peralatan yang tahan lama dan
                     efisien.
                   </p>
                 </div>
-                <a class="btn" href="#/kontak">Hubungi kami</a>
+                <a class="btn" href="#/kontak">Hubungi Kami</a>
               </div>
             </section>
           </div>
@@ -5217,7 +5572,7 @@
               <div class="wrap">
                 <div class="cg">
                   <div class="cl">
-                    <h2>Hubungi kami</h2>
+                    <h2>Hubungi Kami</h2>
                     <ul class="ci">
                       <li>
                         <i
@@ -5302,7 +5657,7 @@
                     </ul>
                   </div>
                   <form id="form">
-                    <h3 style="font-size: 1.4rem">Kirim pesan</h3>
+                    <h3 style="font-size: 1.4rem">Kirim Pesan</h3>
                     <div>
                       <label for="n">Nama</label
                       ><input id="n" required autocomplete="name" />
@@ -5316,7 +5671,7 @@
                       ><textarea id="m" required></textarea>
                     </div>
                     <button class="btn" type="submit">
-                      Kirim lewat WhatsApp
+                      Kirim Lewat WhatsApp
                     </button>
                   </form>
                 </div>
@@ -5402,7 +5757,7 @@
                 </ul>
               </div>
               <div>
-                <h4>Hubungi kami</h4>
+                <h4>Hubungi Kami</h4>
                 <ul>
                   <li>
                     <a href="https://wa.me/6285624565448"
@@ -5420,7 +5775,7 @@
                 </ul>
               </div>
               <div>
-                <h4>Alamat kantor</h4>
+                <h4>Alamat Kantor</h4>
                 <p>
                   PT. Green Eco Teknologi Perumahan Bukit Cilegon Asri K2 no 13
                   Desa Bagendung Kec. Cilegon
@@ -5640,22 +5995,22 @@
 
           const IND = [
             [
-              "Pertambangan dan penggalian",
+              "Pertambangan dan Penggalian",
               "Pemrosesan material keras untuk produksi bahan tambang.",
               I.pile,
             ],
             [
-              "Konstruksi dan beton",
+              "Konstruksi dan Beton",
               "Pengolahan semen, aspal, dan bahan bangunan berkualitas tinggi.",
               I.build,
             ],
             [
-              "Manufaktur dan industri berat",
+              "Manufaktur dan Industri Berat",
               "Pembuatan peralatan tahan aus untuk sektor baja dan besi.",
               I.gear,
             ],
             [
-              "Daur ulang",
+              "Daur Ulang",
               "Pengolahan plastik, vinil, kayu, dan material lainnya dengan efisiensi tinggi.",
               I.rec,
             ],
@@ -5671,17 +6026,17 @@
           $("#why").innerHTML = [
             [
               I.drop,
-              "Mengurangi pencemaran",
+              "Mengurangi Pencemaran",
               "Air lindi dan gas metana ikut dikelola lewat IPAS dan sistem pengelolaan lingkungan.",
             ],
             [
               I.bolt,
-              "Menghasilkan energi alternatif",
+              "Menghasilkan Energi Alternatif",
               "RDF dan BBJP dipakai industri semen dan pembangkit listrik sebagai bahan bakar.",
             ],
             [
               I.ok,
-              "Bernilai bagi masyarakat dan industri",
+              "Bernilai bagi Masyarakat dan Industri",
               "Dengan konsep ekonomi sirkular, setiap bahan yang diolah kembali bermanfaat.",
             ],
           ]
@@ -5694,22 +6049,22 @@
           $("#mis").innerHTML = [
             [
               I.leaf,
-              "Teknologi hijau untuk masa depan",
+              "Teknologi Hijau untuk Masa Depan",
               "Mengembangkan teknologi pengolahan limbah yang efisien dan ramah lingkungan, agar sampah dikelola lebih efektif dan pencemaran berkurang.",
             ],
             [
               I.link,
-              "Kolaborasi untuk transisi energi hijau",
+              "Kolaborasi untuk Transisi Energi Hijau",
               "Bekerja sama dengan mitra lokal dan global untuk mempercepat penggunaan energi terbarukan.",
             ],
             [
               I.heart,
-              "Meningkatkan kualitas hidup",
+              "Meningkatkan Kualitas Hidup",
               "Solusi pengelolaan sampah untuk lingkungan bersih dan sehat, serta kesejahteraan sosial dan ekonomi masyarakat.",
             ],
             [
               I.bolt,
-              "Sistem pengelolaan limbah yang efektif dan berkelanjutan",
+              "Sistem Pengelolaan Limbah yang Efektif dan Berkelanjutan",
               "Membangun operasional berbasis RDF dan BBJP sebagai langkah menuju ekonomi hijau dan energi bersih.",
             ],
           ]
@@ -5721,31 +6076,31 @@
 
           $("#mand").innerHTML = [
             [
-              "Inovasi teknologi",
+              "Inovasi Teknologi",
               "Mengembangkan dan menerapkan teknologi unggulan dalam industri penghancuran.",
               "grid-column:span 3",
               "g",
             ],
             [
-              "Desain dan produksi sendiri",
+              "Desain dan Produksi Sendiri",
               "Peralatan penghancur dengan standar tinggi untuk kualitas dan ketahanan maksimal.",
               "grid-column:span 3",
               "d",
             ],
             [
-              "Kontrol penuh produksi",
+              "Kontrol Penuh Produksi",
               "Setiap produk memenuhi standar industri internasional.",
               "grid-column:span 2",
               "",
             ],
             [
-              "Ketahanan dan efisiensi",
+              "Ketahanan dan Efisiensi",
               "Peralatan lebih tahan lama untuk berbagai sektor industri.",
               "grid-column:span 2",
               "",
             ],
             [
-              "Standar internasional",
+              "Standar Internasional",
               "Mengikuti regulasi dan standar global dalam manufaktur dan inovasi teknologi.",
               "grid-column:span 2",
               "g",
@@ -5790,7 +6145,7 @@
               "Bahan bakar alternatif",
             ],
             [
-              "Air lindi",
+              "Air Lindi",
               "IPAS mengolah air lindi dari sampah untuk mengurangi pencemaran lingkungan.",
               "Air lindi dari sampah",
               "Pencemaran lingkungan berkurang",
@@ -6033,19 +6388,19 @@
           /* cutter hotspots */
           const CT = {
             hook: [
-              "Hook tip",
+              "Hook Tip",
               "Bagian ujung pemotong. Bisa diregenerasi 2-3 kali tanpa penggantian penuh.",
             ],
             side: [
-              "Side cutter",
+              "Side Cutter",
               "Pemotong sisi. Bisa diregenerasi 2-3 kali tanpa penggantian penuh.",
             ],
             body: [
-              "Cutter body",
+              "Cutter Body",
               "Badan cutter. Desain terpisah membuat komponen yang aus bisa diganti secara selektif.",
             ],
             lock: [
-              "Locking system",
+              "Locking System",
               "Sistem pengunci yang menyatukan komponen cutter agar mudah dirakit dan dilepas saat perawatan.",
             ],
           };
@@ -6091,7 +6446,7 @@
               "SK",
             ],
             [
-              "Pemberitahuan perubahan data perseroan",
+              "Pemberitahuan Perubahan Data Perseroan",
               "Ditjen Administrasi Hukum Umum, 16 April 2025",
               "AHU",
             ],
@@ -6103,24 +6458,24 @@
           ];
           const PAT = [
             [
-              "Air-based foreign matter sorting device",
+              "Air-Based Foreign Matter Sorting Device",
               "Alat pemilah benda asing berbasis udara",
             ],
             [
-              "Method for forming a superhard layer",
+              "Method for Forming a Superhard Layer",
               "Metode membentuk lapisan sangat keras dari partikel paduan super keras",
             ],
             [
-              "Cutter assembly for shredder",
+              "Cutter Assembly for Shredder",
               "Rakitan cutter untuk shredder bahan daur ulang",
             ],
             [
-              "Soil waste separation treatment device",
+              "Soil Waste Separation Treatment Device",
               "Alat dan metode pemisahan dan pengolahan limbah tanah",
             ],
-            ["Domestic waste shredder", "Penghancur sampah rumah tangga"],
+            ["Domestic Waste Shredder", "Penghancur sampah rumah tangga"],
             [
-              "Waste vinyl dehydration device",
+              "Waste Vinyl Dehydration Device",
               "Alat pengering limbah vinil dengan gaya sentrifugal",
             ],
           ];
@@ -6442,7 +6797,7 @@
             ],
             "Aplikasi Industri": ["Industrial Applications", "산업 응용 분야"],
             Menu: ["Menu", "메뉴"],
-            "Hubungi kami": ["Contact us", "문의하기"],
+            "Hubungi Kami": ["Contact Us", "문의하기"],
             "/ Alat dan Mesin": ["/ Equipment", "/ 장비"],
             "/ Industri": ["/ Industries", "/ 산업"],
             "/ Kontak": ["/ Contact", "/ 문의"],
@@ -6454,7 +6809,7 @@
             "/ Teknologi": ["/ Technology", "/ 기술"],
             "/ Tentang Kami": ["/ About Us", "/ 회사 소개"],
             Alamat: ["Address", "주소"],
-            "Alamat kantor": ["Office address", "사무실 주소"],
+            "Alamat Kantor": ["Office Address", "사무실 주소"],
             Email: ["Email", "이메일"],
             Telepon: ["Phone", "전화"],
             "Telepon +62 21-3873-5094": [
@@ -6467,8 +6822,8 @@
               "회사 또는 기관",
             ],
             Pesan: ["Message", "메시지"],
-            "Kirim pesan": ["Send a message", "메시지 보내기"],
-            "Kirim lewat WhatsApp": [
+            "Kirim Pesan": ["Send a Message", "메시지 보내기"],
+            "Kirim Lewat WhatsApp": [
               "Send via WhatsApp",
               "WhatsApp으로 보내기",
             ],
@@ -6490,12 +6845,12 @@
                 "RDF/BBJP 기반 폐기물 처리 및 내마모 파쇄 장비.",
               ],
             "Selengkapnya →": ["Learn more →", "자세히 보기 →"],
-            "Semua produk": ["All products", "전체 제품"],
-            "Kenali kami": ["Get to know us", "회사 알아보기"],
-            "Lihat produk": ["View products", "제품 보기"],
-            "Minta penawaran": ["Request a quote", "견적 요청"],
-            "Pelajari teknologinya": [
-              "Learn about the technology",
+            "Semua Produk": ["All Products", "전체 제품"],
+            "Kenali Kami": ["Get to Know Us", "회사 알아보기"],
+            "Lihat Produk": ["View Products", "제품 보기"],
+            "Minta Penawaran": ["Request a Quote", "견적 요청"],
+            "Pelajari Teknologinya": [
+              "Learn About the Technology",
               "기술 알아보기",
             ],
             "Mengolah Sampah": ["Turning Waste", "폐기물을"],
@@ -6521,16 +6876,16 @@
               "From planning to operation",
               "계획부터 운영까지",
             ],
-            "Pemilahan dan energi alternatif": [
-              "Sorting and alternative energy",
+            "Pemilahan dan Energi Alternatif": [
+              "Sorting and Alternative Energy",
               "선별 및 대체 에너지",
             ],
             "Sampah sebagai sumber energi": [
               "Waste as an energy source",
               "에너지원으로서의 폐기물",
             ],
-            "Pengolahan sampah terpadu": [
-              "Integrated waste processing",
+            "Pengolahan Sampah Terpadu": [
+              "Integrated Waste Processing",
               "통합 폐기물 처리",
             ],
             "Dari penimbangan sampai pengeringan": [
@@ -6545,8 +6900,8 @@
               "Leachate and methane gas",
               "침출수 및 메탄가스",
             ],
-            "Dari tumpukan sampah menjadi bahan bakar": [
-              "From piles of waste to fuel",
+            "Dari Tumpukan Sampah Menjadi Bahan Bakar": [
+              "From Piles of Waste to Fuel",
               "쓰레기 더미에서 연료로",
             ],
             "PT Green Eco Teknologi hadir sebagai solusi pengelolaan sampah dan energi terbarukan. Salah satu proyek utama kami adalah Revitalisasi TPSA Bagendung di Kota Cilegon, untuk menaikkan kapasitas olah dan kualitas BBJP/RDF.":
@@ -6577,8 +6932,8 @@
                 "Every processed material becomes useful again for communities and industry.",
                 "처리된 모든 자재가 지역사회와 산업에 다시 유용하게 쓰입니다.",
               ],
-            "Bagaimana sampah diolah": [
-              "How waste is processed",
+            "Bagaimana Sampah Diolah": [
+              "How Waste Is Processed",
               "폐기물 처리 과정",
             ],
             "Klik tiap tahap untuk melihat apa yang terjadi di TPSA Bagendung.":
@@ -6590,7 +6945,7 @@
             Cacah: ["Shredding", "파쇄"],
             Fermentasi: ["Fermentation", "발효"],
             Pengeringan: ["Drying", "건조"],
-            "Air lindi": ["Leachate", "침출수"],
+            "Air Lindi": ["Leachate", "침출수"],
             "Setiap truk sampah ditimbang di jembatan timbang agar volume yang masuk tercatat.":
               [
                 "Every waste truck is weighed at the weighbridge so the incoming volume is recorded.",
@@ -6621,7 +6976,7 @@
                 "The leachate treatment plant (IPAS) treats leachate from waste to reduce environmental pollution.",
                 "침출수 처리시설(IPAS)이 폐기물에서 나오는 침출수를 처리하여 환경오염을 줄입니다.",
               ],
-            "Produk kami": ["Our products", "제품 소개"],
+            "Produk Kami": ["Our Products", "제품 소개"],
             "Limbah diubah menjadi produk bernilai guna.": [
               "Waste is turned into useful products.",
               "폐기물을 유용한 제품으로 바꿉니다.",
@@ -6648,18 +7003,18 @@
                 "Alternative energy produced by breaking down organic waste without oxygen (anaerobic digestion).",
                 "산소 없이 유기성 폐기물을 분해하여 얻는 대체 에너지입니다(혐기성 소화).",
               ],
-            "Mengapa sampah perlu diolah jadi RDF": [
-              "Why waste should be turned into RDF",
+            "Mengapa Sampah Perlu Diolah Jadi RDF": [
+              "Why Waste Should Be Turned into RDF",
               "폐기물을 RDF로 만들어야 하는 이유",
             ],
-            "Mengurangi pencemaran": ["Reducing pollution", "오염 저감"],
+            "Mengurangi Pencemaran": ["Reducing Pollution", "오염 저감"],
             "Air lindi dan gas metana ikut dikelola lewat IPAS dan sistem pengelolaan lingkungan.":
               [
                 "Leachate and methane gas are also managed through the leachate treatment plant (IPAS) and the environmental management system.",
                 "침출수와 메탄가스도 침출수 처리시설(IPAS)과 환경 관리 시스템을 통해 함께 관리됩니다.",
               ],
-            "Menghasilkan energi alternatif": [
-              "Producing alternative energy",
+            "Menghasilkan Energi Alternatif": [
+              "Producing Alternative Energy",
               "대체 에너지 생산",
             ],
             "RDF dan BBJP dipakai industri semen dan pembangkit listrik sebagai bahan bakar.":
@@ -6667,8 +7022,8 @@
                 "RDF and BBJP are used as fuel by the cement industry and power plants.",
                 "RDF와 BBJP는 시멘트 산업과 발전소에서 연료로 사용됩니다.",
               ],
-            "Bernilai bagi masyarakat dan industri": [
-              "Valuable for communities and industry",
+            "Bernilai bagi Masyarakat dan Industri": [
+              "Valuable for Communities and Industry",
               "지역사회와 산업에 가치를 더합니다",
             ],
             "Dengan konsep ekonomi sirkular, setiap bahan yang diolah kembali bermanfaat.":
@@ -6676,8 +7031,8 @@
                 "With the circular economy concept, every processed material becomes useful again.",
                 "순환경제 개념에 따라 처리된 모든 자재가 다시 유용하게 쓰입니다.",
               ],
-            "Pisau penghancur yang lebih awet": [
-              "Longer-lasting crusher blades",
+            "Pisau Penghancur yang Lebih Awet": [
+              "Longer-lasting Crusher Blades",
               "더 오래 쓰는 파쇄 칼날",
             ],
             "Teknologi yang kami pakai pada mata pisau shredder dan crusher menekan biaya penggantian.":
@@ -6692,39 +7047,39 @@
               ],
             "Pelat baja biasa": ["Ordinary steel plate", "일반 강판"],
             "Pelapisan WC-Co": ["WC-Co coating", "WC-Co 코팅"],
-            "Dipakai di berbagai industri": [
-              "Used across many industries",
+            "Dipakai di Berbagai Industri": [
+              "Used Across Many Industries",
               "다양한 산업에서 사용됩니다",
             ],
             "Peralatan penghancur yang kami desain dan produksi sendiri.": [
               "Crushing equipment we design and manufacture ourselves.",
               "직접 설계하고 생산하는 파쇄 장비.",
             ],
-            "Pertambangan dan penggalian": [
-              "Mining and quarrying",
+            "Pertambangan dan Penggalian": [
+              "Mining and Quarrying",
               "광업 및 채석",
             ],
             "Pemrosesan material keras untuk produksi bahan tambang.": [
               "Processing hard materials for mining production.",
               "광물 생산을 위한 경질 소재 처리.",
             ],
-            "Konstruksi dan beton": [
-              "Construction and concrete",
+            "Konstruksi dan Beton": [
+              "Construction and Concrete",
               "건설 및 콘크리트",
             ],
             "Pengolahan semen, aspal, dan bahan bangunan berkualitas tinggi.": [
               "Processing cement, asphalt, and high-quality building materials.",
               "시멘트, 아스팔트 및 고품질 건축 자재를 처리합니다.",
             ],
-            "Manufaktur dan industri berat": [
-              "Manufacturing and heavy industry",
+            "Manufaktur dan Industri Berat": [
+              "Manufacturing and Heavy Industry",
               "제조 및 중공업",
             ],
             "Pembuatan peralatan tahan aus untuk sektor baja dan besi.": [
               "Making wear-resistant equipment for the steel and iron sector.",
               "철강 산업용 내마모 장비를 제작합니다.",
             ],
-            "Daur ulang": ["Recycling", "재활용"],
+            "Daur Ulang": ["Recycling", "재활용"],
             "Pengolahan plastik, vinil, kayu, dan material lainnya dengan efisiensi tinggi.":
               [
                 "Highly efficient processing of plastic, vinyl, wood, and other materials.",
@@ -6743,8 +7098,8 @@
               "Innovative solutions in waste management and renewable energy.",
               "폐기물 관리와 재생에너지 분야의 혁신적인 솔루션.",
             ],
-            "Tantangan lingkungan, kami jadikan peluang": [
-              "We turn environmental challenges into opportunities",
+            "Tantangan Lingkungan, Kami Jadikan Peluang": [
+              "We Turn Environmental Challenges into Opportunities",
               "환경 문제를 기회로 바꿉니다",
             ],
             "Pendekatan berbasis teknologi dan keberlanjutan untuk perubahan yang nyata.":
@@ -6776,8 +7131,8 @@
               "Capacity rises from 30 to 60 tons/day or more.",
               "처리 용량이 하루 30톤에서 60톤 이상으로 늘어납니다.",
             ],
-            "Kapasitas pengolahan TPSA Bagendung": [
-              "Processing capacity of the Bagendung landfill (TPSA)",
+            "Kapasitas Pengolahan TPSA Bagendung": [
+              "Processing Capacity of the Bagendung Landfill (TPSA)",
               "Bagendung 매립장(TPSA) 처리 용량",
             ],
             "Revitalisasi menargetkan kapasitas olah naik dari 30 ton/hari menjadi 60 ton/hari atau lebih.":
@@ -6791,33 +7146,33 @@
               "Unit: tons of waste per day.",
               "단위: 폐기물 톤/일.",
             ],
-            "Tujuan revitalisasi TPSA Bagendung": [
-              "Goals of the Bagendung landfill (TPSA) revitalization",
+            "Tujuan Revitalisasi TPSA Bagendung": [
+              "Goals of the Bagendung Landfill (TPSA) Revitalization",
               "Bagendung 매립장(TPSA) 재정비 목표",
             ],
-            "Pencacahan dan fermentasi": [
-              "Shredding and fermentation",
+            "Pencacahan dan Fermentasi": [
+              "Shredding and Fermentation",
               "파쇄 및 발효",
             ],
             "Meningkatkan kualitas BBJP/RDF.": [
               "Improving BBJP/RDF quality.",
               "BBJP/RDF 품질을 높입니다.",
             ],
-            "Kapasitas dua kali lipat": [
-              "Double the capacity",
+            "Kapasitas Dua Kali Lipat": [
+              "Double the Capacity",
               "처리 용량 2배",
             ],
             "Dari 30 ton/hari menjadi 60 ton/hari.": [
               "From 30 tons/day to 60 tons/day.",
               "하루 30톤에서 60톤으로 확대합니다.",
             ],
-            "Sistem dryer": ["Dryer system", "건조 시스템"],
+            "Sistem Dryer": ["Dryer System", "건조 시스템"],
             "Menurunkan kadar air dan menaikkan nilai kalor RDF.": [
               "Lowers moisture content and raises the calorific value of RDF.",
               "수분 함량을 낮추고 RDF의 발열량을 높입니다.",
             ],
-            "Lingkungan terintegrasi": [
-              "Integrated environmental management",
+            "Lingkungan Terintegrasi": [
+              "Integrated Environmental Management",
               "통합 환경 관리",
             ],
             "Pengelolaan air lindi dan gas metana.": [
@@ -6830,9 +7185,9 @@
                 "To be a leader in sustainable waste management technology innovation, creating a healthier, energy-friendly environment.",
                 "지속 가능한 폐기물 관리 기술 혁신을 선도하여 더 건강하고 에너지 친화적인 환경을 만듭니다.",
               ],
-            "Misi kami": ["Our mission", "우리의 미션"],
-            "Teknologi hijau untuk masa depan": [
-              "Green technology for the future",
+            "Misi Kami": ["Our Mission", "우리의 미션"],
+            "Teknologi Hijau untuk Masa Depan": [
+              "Green Technology for the Future",
               "미래를 위한 친환경 기술",
             ],
             "Mengembangkan teknologi pengolahan limbah yang efisien dan ramah lingkungan, agar sampah dikelola lebih efektif dan pencemaran berkurang.":
@@ -6840,8 +7195,8 @@
                 "Developing efficient, environmentally friendly waste processing technology so waste is managed more effectively and pollution is reduced.",
                 "효율적이고 친환경적인 폐기물 처리 기술을 개발하여 폐기물을 더 효과적으로 관리하고 오염을 줄입니다.",
               ],
-            "Kolaborasi untuk transisi energi hijau": [
-              "Collaboration for the green energy transition",
+            "Kolaborasi untuk Transisi Energi Hijau": [
+              "Collaboration for the Green Energy Transition",
               "친환경 에너지 전환을 위한 협력",
             ],
             "Bekerja sama dengan mitra lokal dan global untuk mempercepat penggunaan energi terbarukan.":
@@ -6849,8 +7204,8 @@
                 "Working with local and global partners to accelerate the use of renewable energy.",
                 "국내외 파트너와 협력하여 재생에너지 활용을 앞당깁니다.",
               ],
-            "Meningkatkan kualitas hidup": [
-              "Improving quality of life",
+            "Meningkatkan Kualitas Hidup": [
+              "Improving Quality of Life",
               "삶의 질 향상",
             ],
             "Solusi pengelolaan sampah untuk lingkungan bersih dan sehat, serta kesejahteraan sosial dan ekonomi masyarakat.":
@@ -6858,8 +7213,8 @@
                 "Waste management solutions for a clean, healthy environment and for the social and economic well-being of communities.",
                 "깨끗하고 건강한 환경과 지역사회의 사회·경제적 복지를 위한 폐기물 관리 솔루션.",
               ],
-            "Sistem pengelolaan limbah yang efektif dan berkelanjutan": [
-              "Effective and sustainable waste management systems",
+            "Sistem Pengelolaan Limbah yang Efektif dan Berkelanjutan": [
+              "Effective and Sustainable Waste Management Systems",
               "효과적이고 지속 가능한 폐기물 관리 시스템",
             ],
             "Membangun operasional berbasis RDF dan BBJP sebagai langkah menuju ekonomi hijau dan energi bersih.":
@@ -6867,9 +7222,9 @@
                 "Building operations based on RDF and BBJP as a step toward a green economy and clean energy.",
                 "RDF와 BBJP 기반 운영 체계를 구축하여 녹색경제와 청정에너지로 나아갑니다.",
               ],
-            "Layanan perusahaan": ["Our services", "사업 분야"],
-            "Konsultasi dan implementasi teknologi RDF": [
-              "RDF technology consulting and implementation",
+            "Layanan Perusahaan": ["Our Services", "사업 분야"],
+            "Konsultasi dan Implementasi Teknologi RDF": [
+              "RDF Technology Consulting and Implementation",
               "RDF 기술 컨설팅 및 구축",
             ],
             "Pendampingan merancang dan menerapkan sistem RDF/BBJP, dari perencanaan sampai operasi.":
@@ -6885,8 +7240,8 @@
               "Managing the waste flow from weighing through drying.",
               "계량부터 건조까지 폐기물의 흐름을 관리합니다.",
             ],
-            "Audit dan pengelolaan dampak lingkungan": [
-              "Environmental audit and impact management",
+            "Audit dan Pengelolaan Dampak Lingkungan": [
+              "Environmental Audit and Impact Management",
               "환경 감사 및 영향 관리",
             ],
             "Termasuk pengelolaan air lindi dan gas metana.": [
@@ -6916,7 +7271,7 @@
               "Conveyor and sorting",
               "컨베이어 및 선별",
             ],
-            "Alur peralatan": ["Equipment flow", "설비 흐름"],
+            "Alur Peralatan": ["Equipment Flow", "설비 흐름"],
             "Urutan peralatan utama di TPSA Bagendung. IPAS mengolah air lindi dan IPLT mengolah lumpur tinja di sekitar TPSA.":
               [
                 "The sequence of main equipment at the Bagendung landfill (TPSA). IPAS treats leachate and IPLT treats septic sludge around the landfill.",
@@ -6965,8 +7320,8 @@
             "Tahap 2": ["Stage 2", "2단계"],
             "Tahap 3": ["Stage 3", "3단계"],
             Pendukung: ["Supporting", "지원 설비"],
-            "Butuh peralatan penghancur?": [
-              "Need crushing equipment?",
+            "Butuh Peralatan Penghancur?": [
+              "Need Crushing Equipment?",
               "파쇄 장비가 필요하신가요?",
             ],
             "Kami mendesain dan memproduksi sendiri lini peralatan penghancur.":
@@ -7022,13 +7377,13 @@
               "Without special welding",
               "특수 용접 미적용",
             ],
-            "Pengelasan khusus": ["Special welding", "특수 용접"],
+            "Pengelasan Khusus": ["Special Welding", "특수 용접"],
             "Umur pakai, dengan performa optimal hingga akhir masa pakai.": [
               "Service life, with optimal performance until the end of its life.",
               "사용 수명이 길고, 수명이 끝날 때까지 최적의 성능을 유지합니다.",
             ],
-            "Hasil pelapisan dan pengelasan": [
-              "Coating and welding results",
+            "Hasil Pelapisan dan Pengelasan": [
+              "Coating and Welding Results",
               "코팅 및 용접 결과",
             ],
             "Pelat dengan lapisan tungsten carbide": [
@@ -7048,10 +7403,10 @@
                 "A modular design allows worn components to be replaced selectively. Click a part on the image or choose from the list.",
                 "모듈형 설계로 마모된 부품만 선택적으로 교체할 수 있습니다. 이미지의 부품을 클릭하거나 목록에서 선택하세요.",
               ],
-            "Hook tip": ["Hook tip", "후크 팁"],
-            "Side cutter": ["Side cutter", "측면 커터"],
-            "Cutter body": ["Cutter body", "커터 바디"],
-            "Locking system": ["Locking system", "체결기"],
+            "Hook Tip": ["Hook Tip", "후크 팁"],
+            "Side Cutter": ["Side Cutter", "측면 커터"],
+            "Cutter Body": ["Cutter Body", "커터 바디"],
+            "Locking System": ["Locking System", "체결기"],
             "Bagian ujung pemotong. Bisa diregenerasi 2-3 kali tanpa penggantian penuh.":
               [
                 "The cutting tip. It can be regenerated 2-3 times without full replacement.",
@@ -7078,12 +7433,12 @@
                 "Hook and side cutters can be regenerated 2-3 times without full replacement.",
                 "후크와 측면 커터는 전체 교체 없이 2~3회 재생할 수 있습니다.",
               ],
-            "Biaya operasional": ["Operating costs", "운영 비용"],
+            "Biaya Operasional": ["Operating Costs", "운영 비용"],
             "Hanya komponen yang aus yang diganti.": [
               "Only worn components are replaced.",
               "마모된 부품만 교체합니다.",
             ],
-            "Efisien dirawat": ["Easy to maintain", "유지보수 용이"],
+            "Efisien Dirawat": ["Easy to Maintain", "유지보수 용이"],
             "Pemeliharaan lebih cepat berkat desain modular.": [
               "Faster maintenance thanks to the modular design.",
               "모듈형 설계로 유지보수가 더 빠릅니다.",
@@ -7097,8 +7452,8 @@
               "Up to 15 times more wear resistant.",
               "내마모성이 최대 15배 높습니다.",
             ],
-            "Produksi dan desain mandiri": [
-              "In-house production and design",
+            "Produksi dan Desain Mandiri": [
+              "In-house Production and Design",
               "자체 생산 및 설계",
             ],
             "Kami tidak hanya mengadopsi teknologi unggulan, tetapi juga mendesain dan memproduksi sendiri lini peralatan penghancur.":
@@ -7106,14 +7461,14 @@
                 "We do not just adopt leading technology; we also design and manufacture our own line of crushing equipment.",
                 "우수한 기술을 도입하는 데 그치지 않고 파쇄 장비 라인을 직접 설계하고 생산합니다.",
               ],
-            "Inovasi teknologi": ["Technology innovation", "기술 혁신"],
+            "Inovasi Teknologi": ["Technology Innovation", "기술 혁신"],
             "Mengembangkan dan menerapkan teknologi unggulan dalam industri penghancuran.":
               [
                 "Developing and applying leading technology in the crushing industry.",
                 "파쇄 산업의 우수한 기술을 개발하고 적용합니다.",
               ],
-            "Desain dan produksi sendiri": [
-              "In-house design and production",
+            "Desain dan Produksi Sendiri": [
+              "In-house Design and Production",
               "자체 설계 및 생산",
             ],
             "Peralatan penghancur dengan standar tinggi untuk kualitas dan ketahanan maksimal.":
@@ -7121,23 +7476,23 @@
                 "High-standard crushing equipment for maximum quality and durability.",
                 "최고의 품질과 내구성을 위한 고표준 파쇄 장비.",
               ],
-            "Kontrol penuh produksi": [
-              "Full production control",
+            "Kontrol Penuh Produksi": [
+              "Full Production Control",
               "생산 전 과정 관리",
             ],
             "Setiap produk memenuhi standar industri internasional.": [
               "Every product meets international industry standards.",
               "모든 제품이 국제 산업 표준을 충족합니다.",
             ],
-            "Ketahanan dan efisiensi": [
-              "Durability and efficiency",
+            "Ketahanan dan Efisiensi": [
+              "Durability and Efficiency",
               "내구성과 효율",
             ],
             "Peralatan lebih tahan lama untuk berbagai sektor industri.": [
               "Longer-lasting equipment for many industrial sectors.",
               "다양한 산업 분야에서 더 오래 쓸 수 있는 장비입니다.",
             ],
-            "Standar internasional": ["International standards", "국제 표준"],
+            "Standar Internasional": ["International Standards", "국제 표준"],
             "Mengikuti regulasi dan standar global dalam manufaktur dan inovasi teknologi.":
               [
                 "Following global regulations and standards in manufacturing and technology innovation.",
@@ -7148,8 +7503,8 @@
                 "Crushing equipment built to international industry standards for many sectors.",
                 "다양한 산업 분야를 위한 국제 산업 표준 수준의 파쇄 장비.",
               ],
-            "Daur ulang dengan efisiensi tinggi": [
-              "Highly efficient recycling",
+            "Daur Ulang dengan Efisiensi Tinggi": [
+              "Highly Efficient Recycling",
               "고효율 재활용",
             ],
             "Pengolahan limbah seperti plastik, vinil, kayu, dan material lainnya.":
@@ -7161,8 +7516,8 @@
             Vinil: ["Vinyl", "비닐"],
             Kayu: ["Wood", "목재"],
             "Material lainnya": ["Other materials", "기타 소재"],
-            "Ceritakan kebutuhan industri Anda": [
-              "Tell us about your industrial needs",
+            "Ceritakan Kebutuhan Industri Anda": [
+              "Tell Us About Your Industrial Needs",
               "귀사의 산업 요구 사항을 알려 주세요",
             ],
             "Kami siap membantu dengan peralatan yang tahan lama dan efisien.":
@@ -7195,8 +7550,8 @@
               "Approval of amendments to the articles of association, 16 April 2025",
               "정관 변경 승인, 2025년 4월 16일",
             ],
-            "Pemberitahuan perubahan data perseroan": [
-              "Notification of changes to company data",
+            "Pemberitahuan Perubahan Data Perseroan": [
+              "Notification of Changes to Company Data",
               "회사 정보 변경 통지",
             ],
             "Ditjen Administrasi Hukum Umum, 16 April 2025": [
